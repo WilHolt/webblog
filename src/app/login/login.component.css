@@ -1,0 +1,13 @@
+.header_space{
+  height: 20vh;
+}
+.header_space h5{
+padding-top:3rem;
+}
+.login_space{
+ padding:8.5rem;
+}
+.hint a{
+  margin-top:-2rem!important;
+  margin-left:-2rem;
+}
