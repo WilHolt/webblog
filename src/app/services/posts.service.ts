@@ -16,31 +16,29 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPosts():Observable<Post[]>{
-    return this.http.get<Post[]>('https://my-json-server.typicode.com/WilHolt/blogdb/posts');
+    return this.http.get<Post[]>('https://jsonplaceholder.typicode.com/posts/');
   }
+
   setPost(post:any){
     const headers = new HttpHeaders()
         .set("Content-Type", "application/json");
-    return this.http.post('https://my-json-server.typicode.com/WilHolt/blogdb/posts', post , {headers});
+    return this.http.post('https://jsonplaceholder.typicode.com/posts', post , {headers});
   }
+
   deletePost(id:any){
     const headers = new HttpHeaders()
         .set("Content-Type", "application/json");
-    return this.http.delete('https://my-json-server.typicode.com/WilHolt/blogdb/posts/'+id,{headers})
+    return this.http.delete('https://jsonplaceholder.typicode.com/posts/'+id,{headers})
     .pipe(map((res: Response) => console.log(res)));
   }
+
   editPost(post:any, newHeaders?: any){
     const headers = new HttpHeaders()
         .set("Content-Type", "application/json");
-    return this.http.patch('https://my-json-server.typicode.com/WilHolt/blogdb/posts/'+post.id, post, { headers } );
+    return this.http.patch('https://jsonplaceholder.typicode.com/posts/'+post.id, post, { headers } );
 
   }
 
-  addPost(post:any){
-    const headers = new HttpHeaders()
-        .set("Content-Type", "application/json");
-     return this.http.post('https://jsonplaceholder.typicode.com/posts/', post, {headers});
-  }
 
   setPostEdit(post:any){
     this.currentPost = post;

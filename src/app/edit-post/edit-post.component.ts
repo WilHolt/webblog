@@ -18,34 +18,30 @@ export class EditPostComponent implements OnInit {
     private fb: FormBuilder) {
       this.editedPost = fb.group({
         title:'',
-        body:'',
-        category:''
       });
     }
     edit(){
       this.currentPost.title = this.editedPost.value.title;
-      this.currentPost.body = this.editedPost.value.body;
-      this.currentPost.category = this.editedPost.value.category;
       this.postService.editPost(this.currentPost)
       .subscribe(
-              val => {
-                  console.log("PATCH call successful value returned in body",
-                              val);
-              },
-              response => {
-                  console.log("PATCH call in error", response);
-              },
-              () => {
-                  console.log("The PATCH observable is now completed.");
-              }
-          );
+        val => {
+          console.log("PATCH call successful value returned in body",
+          val);
+          this.postService.getPosts()
+          .subscribe(res => this.posts = res);
+          console.log(this.posts);
+        },
+        response => {
+          console.log("PATCH call in error", response);
+        },
+        () => {
+          console.log("The PATCH observable is now completed.");
+        }
+      );
     }
     ngOnInit() {
       this.currentPost= this.postService.getPostEdit();
       console.log(this.currentPost);
-      this.postService.getPosts()
-      .subscribe(res => this.posts = res);
-
     }
 
   }
